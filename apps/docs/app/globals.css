@@ -327,6 +327,31 @@ code {
   font-size: var(--umbra-text-lg-size);
   line-height: 1.6;
 }
+/* Keep the copy off the eclipse disc: below it on narrow screens, beside it on wide ones.
+   The disc's size follows the canvas height, so moving or widening the layer only moves the disc. */
+.hero .umbra-stage__layer {
+  top: auto;
+  height: 22rem;
+  mask-image: linear-gradient(transparent, #000 6rem);
+}
+.hero__inner {
+  padding-bottom: 22rem;
+}
+@media (min-width: 1100px) {
+  .hero .umbra-stage__layer {
+    top: 0;
+    height: auto;
+    mask-image: none;
+    right: -60%; /* canvas is 160% wide, so the disc centres at 80% of the hero */
+  }
+  .hero__inner {
+    place-items: center start;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding: var(--umbra-space-16) var(--umbra-space-8);
+    text-align: left;
+  }
+}
 .install {
   display: inline-flex;
   align-items: center;
