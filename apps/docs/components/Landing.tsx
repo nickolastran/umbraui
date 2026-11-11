@@ -27,9 +27,9 @@ export function Landing() {
       <HeroScene className="hero" quality="medium">
         <div className="hero__inner">
           <Badge tone="accent">Static · Animated · 3D</Badge>
-          <TextReveal as="h1" className="hero__title">
-            Interfaces that come out of the dark
-          </TextReveal>
+          <h1 className="hero__title">
+            <TextReveal as="span">Interfaces that come</TextReveal> <span className="hero__dark">out of the dark</span>
+          </h1>
           <p className="hero__lead">
             Umbra UI is a dark-first React component library. Forms, overlays, motion and WebGL scenes share one token system, so everything you ship looks
             like one product.

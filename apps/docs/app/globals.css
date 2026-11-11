@@ -320,6 +320,33 @@ code {
   font-weight: 600;
   text-wrap: balance;
 }
+/* "out of the dark" surfaces from the shadows once the first words have revealed. */
+.hero__dark {
+  display: inline-block;
+  animation: hero-emerge 1.8s var(--umbra-ease-out) 0.75s both;
+}
+@keyframes hero-emerge {
+  0% {
+    opacity: 0;
+    filter: blur(18px) brightness(0.2);
+    transform: scale(0.94);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0) brightness(1.15);
+    text-shadow: 0 0 32px var(--umbra-color-accent), 0 0 4px var(--umbra-color-accent-text);
+  }
+  100% {
+    filter: none;
+    transform: none;
+    text-shadow: 0 0 28px color-mix(in srgb, var(--umbra-color-accent) 35%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__dark {
+    animation: none;
+  }
+}
 .hero__lead {
   margin: 0;
   max-width: 34rem;
