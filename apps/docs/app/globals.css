@@ -6,6 +6,9 @@
 }
 * {
   box-sizing: border-box;
+  /* Thin themed scrollbars everywhere: page, sidebar, search results, code blocks. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--umbra-color-border-strong) transparent;
 }
 html {
   scroll-padding-top: calc(var(--docs-header) + 1rem);
@@ -121,7 +124,7 @@ code {
   margin: 0 0 var(--umbra-space-2);
   padding-inline: var(--umbra-space-2);
   color: var(--umbra-color-text);
-  font-size: var(--umbra-text-xs-size);
+  font-size: var(--umbra-text-sm-size);
   font-weight: 600;
 }
 .nav-group ul {
@@ -134,8 +137,8 @@ code {
   padding: var(--umbra-space-1) var(--umbra-space-2);
   border-radius: var(--umbra-radius-sm);
   color: var(--umbra-color-text-secondary);
-  font-size: var(--umbra-text-sm-size);
-  line-height: var(--umbra-text-sm-line);
+  font-size: var(--umbra-text-md-size);
+  line-height: var(--umbra-text-md-line);
   text-decoration: none;
 }
 .nav-link:hover {
