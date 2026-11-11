@@ -168,7 +168,11 @@ npm run docs:dev         # documentation site
 npm run size             # bundle sizes per entry
 ```
 
-Deploy the docs with `npx vercel --prod` from the repository root; `vercel.json` holds the configuration.
+The docs build to static files in `apps/docs/out`, so any static host works:
+
+- **GitHub Pages:** in the repository settings, set Pages → Source to "GitHub Actions". `.github/workflows/pages.yml` then deploys on every push to `main` (or run it by hand from the Actions tab). The base path is picked up automatically.
+- **Vercel:** `npx vercel --prod` from the repository root; `vercel.json` holds the configuration.
+- **Elsewhere:** `npm run docs:build`. Set `DOCS_BASE_PATH=/sub-path` first if the site is not served from the domain root.
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
