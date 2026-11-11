@@ -10,6 +10,12 @@
   scrollbar-width: thin;
   scrollbar-color: var(--umbra-color-border-strong) transparent;
 }
+/* Theme swoop (see Shell): the new snapshot is revealed by a clip-path, so drop the default cross-fade. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
 html {
   scroll-padding-top: calc(var(--docs-header) + 1rem);
   -webkit-text-size-adjust: 100%;

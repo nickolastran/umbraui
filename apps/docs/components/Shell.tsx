@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { Button, Dialog, DialogContent, IconButton, Kbd, Tooltip, useTheme } from 'umbra-ui';
 import type { CommandItem } from 'umbra-ui/motion';
 import { families, guides, registry } from '@/lib/registry';
@@ -37,6 +38,28 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const [search, setSearch] = useState(false);
   const [menu, setMenu] = useState(false);
 
+  // The new theme sweeps out in a circle from the toggle (or the top-right corner when run from search).
+  const swoop = (from?: Element) => {
+    if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) return toggle();
+    const box = from?.getBoundingClientRect();
+    const x = box ? box.left + box.width / 2 : innerWidth - 40;
+    const y = box ? box.top + box.height / 2 : 32;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const next = resolvedTheme === 'dark' ? 'light' : 'dark';
+    document
+      .startViewTransition(() => {
+        flushSync(toggle);
+        // ThemeProvider applies the attribute in an effect; set it now so the snapshot shows the new theme.
+        document.documentElement.setAttribute('data-umbra-theme', next);
+      })
+      .ready.then(() =>
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 650, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', pseudoElement: '::view-transition-new(root)' },
+        ),
+      );
+  };
+
   const items = useMemo<CommandItem[]>(
     () => [
       ...guides.map((g) => ({ id: g.slug, label: g.name, group: 'Guides', onSelect: () => router.push(`/docs/${g.slug}`) })),
@@ -47,9 +70,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
         keywords: [r.description, ...r.exports],
         onSelect: () => router.push(`/docs/${r.slug}`),
       })),
-      { id: 'theme', label: 'Toggle theme', group: 'Preferences', keywords: ['dark', 'light'], onSelect: toggle },
+      { id: 'theme', label: 'Toggle theme', group: 'Preferences', keywords: ['dark', 'light'], onSelect: () => swoop() },
     ],
-    [router, toggle],
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- swoop only reads the current theme
+    [router, toggle, resolvedTheme],
   );
 
   return (
@@ -84,7 +108,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <Kbd>⌘K</Kbd>
         </Button>
         <Tooltip content={resolvedTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}>
-          <IconButton aria-label="Toggle theme" onClick={toggle}>
+          <IconButton aria-label="Toggle theme" onClick={(e) => swoop(e.currentTarget)}>
             {/* Both icons render on the server; CSS shows the right one, so there is no hydration flash. */}
             <span data-show-in="dark"><Sun /></span>
             <span data-show-in="light"><Moon /></span>
