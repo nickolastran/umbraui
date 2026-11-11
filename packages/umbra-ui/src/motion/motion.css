@@ -127,8 +127,17 @@
   /* NumberTicker */
   .umbra-number-ticker {
     position: relative;
-    display: inline-block;
+    display: inline-grid;
     font-variant-numeric: tabular-nums;
+  }
+  /* The value and an invisible copy of the widest value share one cell, so the width is fixed from the first frame. */
+  .umbra-number-ticker__value,
+  .umbra-number-ticker__sizer {
+    grid-area: 1 / 1;
+    justify-self: end;
+  }
+  .umbra-number-ticker__sizer {
+    visibility: hidden;
   }
 
   /* Marquee */
