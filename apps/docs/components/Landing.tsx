@@ -122,7 +122,6 @@ import 'umbra-ui/styles.css';`}
           />
         </section>
       </Container>
-      <footer className="footer">Umbra UI is MIT licensed.</footer>
     </main>
   );
 }
