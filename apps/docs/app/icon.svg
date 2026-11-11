@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    path { fill: #5b5bd6; }
+    @media (prefers-color-scheme: dark) { path { fill: #a9a7ff; } }
+  </style>
+  <path fill-rule="evenodd" d="M50 5a45 45 0 1 0 0 90a45 45 0 1 0 0-90Z M60 14a30 30 0 1 1 0 60a30 30 0 1 1 0-60Z"/>
+</svg>
