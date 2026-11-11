@@ -26,7 +26,6 @@ export function Landing() {
     <main>
       <HeroScene className="hero" quality="medium">
         <div className="hero__inner">
-          <Badge tone="accent">Static · Animated · 3D</Badge>
           <h1 className="hero__title">
             <TextReveal as="span">Interfaces that come</TextReveal> <span className="hero__dark">out of the dark</span>
           </h1>
@@ -43,7 +42,7 @@ export function Landing() {
             </Button>
           </Inline>
           <div className="install">
-            npm install umbra-ui
+            <code>npm install umbra-ui</code>
             <Kbd>⌘K</Kbd>
           </div>
         </div>

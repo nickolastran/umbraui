@@ -308,7 +308,8 @@ code {
   align-content: center;
   gap: var(--umbra-space-5);
   min-height: inherit;
-  padding: var(--umbra-space-16) var(--umbra-space-4);
+  /* the extra 2.625rem is the space the old badge took, so the headline sits where it used to */
+  padding: calc(var(--umbra-space-16) + 2.625rem) var(--umbra-space-4) var(--umbra-space-16);
   text-align: center;
 }
 .hero__title {
@@ -375,19 +376,40 @@ code {
     place-items: center start;
     max-width: 80rem;
     margin-inline: auto;
-    padding: var(--umbra-space-16) var(--umbra-space-8);
+    padding-inline: var(--umbra-space-8);
+    padding-bottom: var(--umbra-space-16);
     text-align: left;
   }
 }
 .install {
   display: inline-flex;
   align-items: center;
-  gap: var(--umbra-space-3);
-  padding: var(--umbra-space-1) var(--umbra-space-1) var(--umbra-space-1) var(--umbra-space-3);
+  gap: var(--umbra-space-4);
+  padding: var(--umbra-space-1_5) var(--umbra-space-1_5) var(--umbra-space-1_5) var(--umbra-space-4);
   border: 1px solid var(--umbra-color-border);
-  border-radius: var(--umbra-radius-md);
+  border-radius: var(--umbra-radius-lg);
   background: color-mix(in srgb, var(--umbra-color-surface-1) 80%, transparent);
   font-family: var(--umbra-font-mono);
+  font-size: var(--umbra-text-md-size);
+}
+.install code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: inherit;
+}
+.install code::before {
+  content: '$ ';
+  color: var(--umbra-color-text-muted);
+}
+.umbra-kbd {
+  font-family: var(--umbra-font-sans); /* the mono font has no ⌘ glyph, so the fallback renders it tiny */
+}
+.install .umbra-kbd {
+  height: 24px;
+  min-width: 32px;
+  padding: 0 var(--umbra-space-2);
+  border-radius: var(--umbra-radius-sm);
   font-size: var(--umbra-text-sm-size);
 }
 .section {
