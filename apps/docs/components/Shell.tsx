@@ -68,20 +68,20 @@ export function Shell({ children }: { children: React.ReactNode }) {
           Umbra UI
         </Link>
         <nav className="header__nav" aria-label="Primary">
-          <Button asChild variant="ghost" tone="neutral" size="sm">
+          <Button asChild variant="ghost" tone="neutral">
             <Link href="/docs/getting-started">Docs</Link>
           </Button>
-          <Button asChild variant="ghost" tone="neutral" size="sm">
+          <Button asChild variant="ghost" tone="neutral">
             <Link href="/docs/button">Components</Link>
           </Button>
-          <Button asChild variant="ghost" tone="neutral" size="sm">
+          <Button asChild variant="ghost" tone="neutral">
             <Link href="/docs/theming">Theming</Link>
           </Button>
         </nav>
         <span className="header__spacer" />
-        <Button className="search-trigger" variant="outline" tone="neutral" size="sm" aria-keyshortcuts="Meta+K Control+K" onClick={() => setSearch(true)}>
+        <Button className="search-trigger" variant="outline" tone="neutral" aria-keyshortcuts="Meta+K Control+K" onClick={() => setSearch(true)}>
           <span>Search documentation</span>
-          <Kbd size="sm">⌘K</Kbd>
+          <Kbd>⌘K</Kbd>
         </Button>
         <Tooltip content={resolvedTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}>
           <IconButton aria-label="Toggle theme" onClick={toggle}>
