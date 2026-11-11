@@ -132,6 +132,20 @@ describe('TextReveal', () => {
     const { container } = render(<TextReveal by="char">Umbra</TextReveal>);
     expect(container.querySelectorAll('.umbra-text-reveal__piece')).toHaveLength(5);
   });
+  it('becomes plain text once the reveal finishes, so selection and copy behave normally', async () => {
+    const ref = createRef<HTMLElement>();
+    render(<TextReveal ref={ref} as="h2">Out of the dark</TextReveal>);
+    await waitFor(() => expect(ref.current!.querySelector('.umbra-text-reveal__piece')).toBeNull(), { timeout: 4000 });
+    expect(ref.current!.childNodes).toHaveLength(1);
+    expect(ref.current!.firstChild!.nodeType).toBe(Node.TEXT_NODE);
+    expect(screen.getByRole('heading', { level: 2, name: 'Out of the dark' })).toBe(ref.current);
+  });
+  it('settles under reduced motion too', async () => {
+    const ref = createRef<HTMLElement>();
+    render(<TextReveal ref={ref} reducedMotion="always">Out of the dark</TextReveal>);
+    await waitFor(() => expect(ref.current!.childNodes).toHaveLength(1), { timeout: 4000 });
+    expect(ref.current).toHaveTextContent('Out of the dark');
+  });
   it('renders one unsplit block under reduced motion', () => {
     const { container } = render(<TextReveal reducedMotion="always">Out of the dark</TextReveal>);
     expect(container.querySelectorAll('.umbra-text-reveal__piece')).toHaveLength(0);

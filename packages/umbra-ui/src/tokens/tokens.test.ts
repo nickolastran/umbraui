@@ -35,6 +35,8 @@ describe.each(['dark', 'light'] as const)('%s theme contrast (WCAG 2.1 AA)', (th
     ...(['color-accent', 'color-accent-hover', 'color-accent-active', 'color-danger-hover', 'color-danger-active', ...states.map((s) => `color-${s}` as const)] as const).map(
       (bg) => ['color-text-on-accent', bg, 4.5] as [ThemedTokenName, ThemedTokenName, number],
     ),
+    // Selected text is always drawn in color-text on color-selection (see base.css).
+    ['color-text', 'color-selection', 4.5] as [ThemedTokenName, ThemedTokenName, number],
     ...surfaces.flatMap((bg) => [
       ['color-border-control', bg, 3] as [ThemedTokenName, ThemedTokenName, number],
       ['color-focus', bg, 3] as [ThemedTokenName, ThemedTokenName, number],

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import type { ElementType, HTMLAttributes } from 'react';
 import { motion } from 'motion/react';
 import { cx } from '../../utils/cx';
@@ -21,14 +21,30 @@ export interface TextRevealProps extends Omit<HTMLAttributes<HTMLElement>, 'chil
   reducedMotion?: ReducedMotionSetting;
 }
 
-/** Reveals a line of text piece by piece. Screen readers get the full sentence once, not the fragments. */
+/**
+ * Reveals a line of text piece by piece. Screen readers get the full sentence once, not the fragments.
+ * When the reveal finishes the text becomes a single plain text node again, so selection, copy and
+ * line-wrapping behave exactly like ordinary text.
+ */
 export const TextReveal = forwardRef<HTMLElement, TextRevealProps>(function TextReveal(
   { children, as: Comp = 'p', by = 'word', trigger = 'mount', delay = 0, reducedMotion, className, ...rest },
   ref,
 ) {
   const reduced = useReducedMotion(reducedMotion);
+  // Settled is keyed to the text, so changing `children` plays the reveal again.
+  const [settled, setSettled] = useState<string | null>(null);
   const pieces = by === 'char' ? Array.from(children) : children.split(/(\s+)/);
+  const last = pieces.reduce((found, piece, i) => (/^\s+$/.test(piece) ? found : i), -1);
   const play = trigger === 'mount' ? { animate: 'visible' } : { whileInView: 'visible', viewport: { once: true, amount: 0.6 } };
+  const settle = (variant: unknown) => variant === 'visible' && setSettled(children);
+
+  if (settled === children) {
+    return (
+      <Comp ref={ref} className={cx('umbra-text-reveal', className)} {...rest}>
+        {children}
+      </Comp>
+    );
+  }
 
   return (
     <Comp ref={ref} className={cx('umbra-text-reveal', className)} {...rest}>
@@ -37,6 +53,7 @@ export const TextReveal = forwardRef<HTMLElement, TextRevealProps>(function Text
         aria-hidden="true"
         initial="hidden"
         {...play}
+        onAnimationComplete={reduced ? settle : undefined}
         variants={
           reduced
             ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { ...transitions.slow, delay } } }
@@ -52,6 +69,7 @@ export const TextReveal = forwardRef<HTMLElement, TextRevealProps>(function Text
                 <span key={i} className="umbra-text-reveal__clip">
                   <motion.span
                     className="umbra-text-reveal__piece"
+                    onAnimationComplete={i === last ? settle : undefined}
                     variants={{ hidden: { y: '100%', opacity: 0 }, visible: { y: 0, opacity: 1, transition: transitions.slower } }}
                   >
                     {piece}

@@ -26,6 +26,21 @@
     background-color: var(--umbra-color-bg);
   }
 
+  /* Selected text uses the theme instead of the browser's default blue. The text colour is fixed too, so
+     coloured text (links, accent labels, badges) stays readable on the highlight. */
+  ::selection {
+    background-color: var(--umbra-color-selection);
+    color: var(--umbra-color-text);
+  }
+  /* Headings use tight leading, but browsers paint the selection box at the font's full ascent + descent,
+     so on multi-line headings the boxes overlap the neighbouring lines. Mark selected heading text with
+     the accent colour instead of a box. */
+  :is(h1, h2, h3, h4, h5, h6)::selection,
+  :is(h1, h2, h3, h4, h5, h6) ::selection {
+    background-color: transparent;
+    color: var(--umbra-color-accent-text);
+  }
+
   .umbra-sr-only {
     position: absolute;
     width: 1px;

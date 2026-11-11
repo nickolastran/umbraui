@@ -100,6 +100,7 @@
     --umbra-color-accent-border: #34347a;
     --umbra-color-neon: #5ee6ff;
     --umbra-color-focus: #8b89ff;
+    --umbra-color-selection: #34347a;
     --umbra-color-success: #1a7f4b;
     --umbra-color-success-text: #4ade94;
     --umbra-color-success-subtle: #0c2418;
@@ -153,6 +154,7 @@
     --umbra-color-accent-border: #c3c2f2;
     --umbra-color-neon: #0e8fb0;
     --umbra-color-focus: #5b5bd6;
+    --umbra-color-selection: #c9c8f5;
     --umbra-color-success: #18794a;
     --umbra-color-success-text: #12683e;
     --umbra-color-success-subtle: #e8f7ee;
