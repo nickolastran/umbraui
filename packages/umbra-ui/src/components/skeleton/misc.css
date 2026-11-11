@@ -19,6 +19,12 @@
     aspect-ratio: 1;
     border-radius: var(--umbra-radius-full);
   }
+  @media (pointer: coarse) {
+    .umbra-skeleton[data-variant='circle'] {
+      width: 32px; /* matches the Avatar it stands in for, which keeps its size on touch */
+      height: 32px;
+    }
+  }
   .umbra-skeleton[data-animated] {
     animation: umbra-pulse calc(var(--umbra-duration-slower) * 3) var(--umbra-ease-in-out) infinite;
   }

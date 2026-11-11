@@ -1,4 +1,13 @@
 @layer umbra {
+  /* Touch screens: grow every control size (buttons, inputs, tabs, menu items) toward the 44px touch-target guideline.
+     Avatars and skeletons pin their own sizes so only interactive things change. */
+  @media (pointer: coarse) {
+    :root {
+      --umbra-size-sm: 36px;
+      --umbra-size-md: 44px;
+      --umbra-size-lg: 48px;
+    }
+  }
   /* Zero-specificity defaults for every Umbra element. */
   :where([class*='umbra-']) {
     box-sizing: border-box;

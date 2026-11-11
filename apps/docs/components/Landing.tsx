@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Badge, Button, Card, Checkbox, Container, Grid, Inline, Kbd, Stack, Switch, Tabs, TabsContent, TabsList, TabsTrigger } from 'umbra-ui';
+import { Badge, Button, Card, Checkbox, Container, Grid, Inline, Stack, Switch, Tabs, TabsContent, TabsList, TabsTrigger } from 'umbra-ui';
 import { HeroScene, Logo3D, Orb } from 'umbra-ui/3d';
 import { BeamBorder, Marquee, NumberTicker, ShimmerButton, SpotlightCard, TextReveal } from 'umbra-ui/motion';
 import { CodeBlock } from './CodeBlock';
@@ -19,9 +19,27 @@ function Tile({ href, title, children }: { href: string; title: string; children
   );
 }
 
+const CopyIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+    <rect x="5" y="5" width="9" height="9" rx="2" />
+    <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" />
+  </svg>
+);
+const CheckIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="m3 8.5 3 3 7-7" />
+  </svg>
+);
+
 export function Landing() {
   const router = useRouter();
   const [checked, setChecked] = useState(true);
+  const [copied, setCopied] = useState(false);
+  const copyInstall = async () => {
+    await navigator.clipboard.writeText('npm install umbra-ui');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1600);
+  };
   return (
     <main>
       <HeroScene className="hero" quality="medium">
@@ -42,8 +60,13 @@ export function Landing() {
             </Button>
           </Inline>
           <div className="install">
-            <code>npm install umbra-ui</code>
-            <Kbd>⌘K</Kbd>
+            <button type="button" className="install__copy" onClick={copyInstall}>
+              <code>npm install umbra-ui</code>
+              <span className="install__status" aria-live="polite">
+                {copied ? <CheckIcon /> : <CopyIcon />}
+                <span className="install__label">{copied ? 'Copied' : 'Copy'}</span>
+              </span>
+            </button>
           </div>
         </div>
       </HeroScene>

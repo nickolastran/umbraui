@@ -393,9 +393,8 @@ code {
 }
 .install {
   display: inline-flex;
-  align-items: center;
-  gap: var(--umbra-space-4);
-  padding: var(--umbra-space-1_5) var(--umbra-space-1_5) var(--umbra-space-1_5) var(--umbra-space-4);
+  align-items: stretch;
+  padding: var(--umbra-space-1);
   border: 1px solid var(--umbra-color-border);
   border-radius: var(--umbra-radius-lg);
   background: color-mix(in srgb, var(--umbra-color-surface-1) 80%, transparent);
@@ -415,12 +414,39 @@ code {
 .umbra-kbd {
   font-family: var(--umbra-font-sans); /* the mono font has no ⌘ glyph, so the fallback renders it tiny */
 }
-.install .umbra-kbd {
-  height: 24px;
-  min-width: 32px;
-  padding: 0 var(--umbra-space-2);
-  border-radius: var(--umbra-radius-sm);
+/* The whole command is the copy target. */
+.install__copy {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  border-radius: var(--umbra-radius-md);
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.install__copy {
+  gap: var(--umbra-space-4);
+  min-height: 36px;
+  padding: 0 var(--umbra-space-3);
+}
+.install__copy:hover {
+  background: var(--umbra-color-surface-2);
+}
+.install__copy:focus-visible {
+  outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+  outline-offset: 0;
+}
+.install__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--umbra-space-1_5);
+  color: var(--umbra-color-text-muted);
+  font-family: var(--umbra-font-sans);
   font-size: var(--umbra-text-sm-size);
+}
+.install__copy:hover .install__status {
+  color: var(--umbra-color-text);
 }
 .section {
   padding-block: var(--umbra-space-16);
@@ -668,4 +694,17 @@ code {
 [data-umbra-theme='dark'] [data-show-in='dark'],
 [data-umbra-theme='light'] [data-show-in='light'] {
   display: inline-flex;
+}
+
+/* Touch screens: give text links the same roomier tap targets the library gives its controls. */
+@media (pointer: coarse) {
+  .nav-link {
+    padding-block: var(--umbra-space-3);
+  }
+  .footer__link {
+    padding-block: var(--umbra-space-3);
+  }
+  .install__copy {
+    min-height: 44px;
+  }
 }

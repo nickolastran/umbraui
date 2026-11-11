@@ -26,6 +26,18 @@
     --_size: var(--umbra-size-lg);
     font-size: var(--umbra-text-sm-size);
   }
+  /* Avatars are not tap targets: keep their desktop size when base.css grows control sizes for touch. */
+  @media (pointer: coarse) {
+    .umbra-avatar {
+      --_size: 32px;
+    }
+    .umbra-avatar[data-size='sm'] {
+      --_size: var(--umbra-space-6);
+    }
+    .umbra-avatar[data-size='lg'] {
+      --_size: 40px;
+    }
+  }
   .umbra-avatar[data-shape='square'] {
     border-radius: var(--umbra-radius-sm);
   }
