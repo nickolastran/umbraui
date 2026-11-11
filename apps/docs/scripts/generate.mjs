@@ -3,7 +3,8 @@
 //  - generated/content.ts   static import map of content/*.mdx
 //  - generated/demos.ts     lazy import map of demos/*.tsx
 //  - generated/sources.json demo source shown in the "Code" tab
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+//  - generated/changelog.mdx pending changesets plus the library's CHANGELOG.md, for /changelog
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import docgen from 'react-docgen-typescript';
@@ -58,5 +59,26 @@ const sources = Object.fromEntries(
   demos.map((s) => [s, readFileSync(join(root, 'demos', `${s}.tsx`), 'utf8').split('\n// ---')[0].replace(/^'use client';\n+/, '').trim()]),
 );
 writeFileSync(join(out, 'sources.json'), JSON.stringify(sources));
+
+// Changelog: changesets not yet released go under "Unreleased"; released versions come from CHANGELOG.md,
+// which the Version Packages PR writes. Before the first release only the Unreleased part exists.
+const changesetDir = join(root, '../../.changeset');
+const bumps = { major: 'Major Changes', minor: 'Minor Changes', patch: 'Patch Changes' };
+const pending = { major: [], minor: [], patch: [] };
+for (const f of readdirSync(changesetDir).filter((f) => f.endsWith('.md') && f !== 'README.md')) {
+  const [, front = '', body = ''] = readFileSync(join(changesetDir, f), 'utf8').match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/) ?? [];
+  const bump = front.match(/:\s*(major|minor|patch)/)?.[1];
+  if (bump && body.trim()) pending[bump].push(`- ${body.trim().replace(/\n+/g, ' ')}`);
+}
+const unreleased = Object.keys(bumps)
+  .filter((b) => pending[b].length)
+  .map((b) => `### ${bumps[b]}\n\n${pending[b].join('\n')}`)
+  .join('\n\n');
+const changelogFile = join(lib, 'CHANGELOG.md');
+const released = existsSync(changelogFile) ? readFileSync(changelogFile, 'utf8').replace(/^# .*\n+/, '') : '';
+writeFileSync(
+  join(out, 'changelog.mdx'),
+  [unreleased && `## Unreleased\n\n${unreleased}`, released, !unreleased && !released && 'No releases yet.'].filter(Boolean).join('\n\n') + '\n',
+);
 
 console.log(`generated: ${Object.keys(props).length} props tables, ${content.length} content pages, ${demos.length} demos`);

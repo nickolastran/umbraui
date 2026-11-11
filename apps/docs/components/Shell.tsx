@@ -119,6 +119,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <footer className="footer">
         <span>© 2026 Umbra UI. Released under the MIT License.</span>
         <nav className="footer__links" aria-label="Legal">
+          <Link className="footer__link" href="/changelog">Changelog</Link>
           <Link className="footer__link" href="/terms">Terms of Service</Link>
           <Link className="footer__link" href="/privacy">Privacy Policy</Link>
         </nav>

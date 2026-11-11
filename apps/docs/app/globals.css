@@ -518,6 +518,18 @@ code {
 .footer__link:hover {
   color: var(--umbra-color-text);
 }
+/* Changelog: one version per h2, separated like the legal page sections. */
+.changelog {
+  margin-top: var(--umbra-space-10);
+  padding-top: var(--umbra-space-10);
+  border-top: 1px solid var(--umbra-color-border-subtle);
+}
+.changelog > :first-child {
+  margin-top: 0;
+}
+.changelog h2:not(:first-child) {
+  margin-top: var(--umbra-space-12);
+}
 /* Legal pages (LegalPage.tsx) */
 .legal {
   max-width: 72rem;
