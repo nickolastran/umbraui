@@ -1,0 +1,10 @@
+## Usage notes
+
+Wrap exactly one Umbra control. It receives its `id`, `aria-describedby`, `aria-invalid`, `required` and `disabled` through context; props set on the control win.
+
+## Accessibility
+
+- `<label for>` is wired to the control; group controls get `aria-labelledby`.
+- Description and error are both referenced by `aria-describedby`, error first.
+- The error container is an `aria-live="polite"` region, so new errors are announced.
+- The required asterisk is decorative; the control gets `required`.

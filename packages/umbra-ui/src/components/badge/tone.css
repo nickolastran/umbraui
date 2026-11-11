@@ -1,0 +1,80 @@
+@layer umbra {
+  /* Tone custom properties shared by Badge and Alert. */
+  :is(.umbra-badge, .umbra-alert) {
+    --_solid: var(--umbra-color-text);
+    --_on-solid: var(--umbra-color-bg);
+    --_fg: var(--umbra-color-text-secondary);
+    --_subtle: var(--umbra-color-surface-2);
+    --_line: var(--umbra-color-border);
+  }
+  :is(.umbra-badge, .umbra-alert)[data-tone='accent'] {
+    --_solid: var(--umbra-color-accent);
+    --_on-solid: var(--umbra-color-text-on-accent);
+    --_fg: var(--umbra-color-accent-text);
+    --_subtle: var(--umbra-color-accent-subtle);
+    --_line: var(--umbra-color-accent-border);
+  }
+  :is(.umbra-badge, .umbra-alert)[data-tone='success'] {
+    --_solid: var(--umbra-color-success);
+    --_on-solid: var(--umbra-color-text-on-accent);
+    --_fg: var(--umbra-color-success-text);
+    --_subtle: var(--umbra-color-success-subtle);
+    --_line: var(--umbra-color-success-border);
+  }
+  :is(.umbra-badge, .umbra-alert)[data-tone='warning'] {
+    --_solid: var(--umbra-color-warning);
+    --_on-solid: var(--umbra-color-text-on-accent);
+    --_fg: var(--umbra-color-warning-text);
+    --_subtle: var(--umbra-color-warning-subtle);
+    --_line: var(--umbra-color-warning-border);
+  }
+  :is(.umbra-badge, .umbra-alert)[data-tone='danger'] {
+    --_solid: var(--umbra-color-danger);
+    --_on-solid: var(--umbra-color-text-on-accent);
+    --_fg: var(--umbra-color-danger-text);
+    --_subtle: var(--umbra-color-danger-subtle);
+    --_line: var(--umbra-color-danger-border);
+  }
+  :is(.umbra-badge, .umbra-alert)[data-tone='info'] {
+    --_solid: var(--umbra-color-info);
+    --_on-solid: var(--umbra-color-text-on-accent);
+    --_fg: var(--umbra-color-info-text);
+    --_subtle: var(--umbra-color-info-subtle);
+    --_line: var(--umbra-color-info-border);
+  }
+
+  .umbra-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--umbra-space-1_5);
+    height: 22px;
+    padding: 0 var(--umbra-space-2);
+    border: 1px solid var(--_line);
+    border-radius: var(--umbra-radius-full);
+    background-color: var(--_subtle);
+    color: var(--_fg);
+    font-size: var(--umbra-text-xs-size);
+    line-height: 1;
+    font-weight: var(--umbra-font-weight-medium);
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .umbra-badge[data-size='sm'] {
+    height: 18px;
+    padding: 0 var(--umbra-space-1_5);
+  }
+  .umbra-badge[data-variant='solid'] {
+    background-color: var(--_solid);
+    border-color: transparent;
+    color: var(--_on-solid);
+  }
+  .umbra-badge[data-variant='outline'] {
+    background-color: transparent;
+  }
+  .umbra-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--umbra-radius-full);
+    background-color: currentColor;
+  }
+}

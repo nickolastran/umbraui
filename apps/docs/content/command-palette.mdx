@@ -1,0 +1,10 @@
+## Usage notes
+
+Filtering is a case-insensitive match of every search term against label, group and keywords.
+
+## Accessibility
+
+- A modal dialog: focus is trapped, and restored to the previously focused element on close.
+- The search field is a `combobox` controlling a `listbox`; the active option is tracked with `aria-activedescendant`.
+- ↑/↓ move (wrapping, skipping disabled), Home/End jump, Enter runs, Escape closes, ⌘K / Ctrl+K toggles.
+- The number of results is announced politely.

@@ -1,0 +1,9 @@
+## Usage notes
+
+`children` render above the scene as normal DOM.
+
+## Accessibility
+
+- The canvas is `aria-hidden`; your content is unaffected.
+- Without WebGL or under reduced motion a static CSS eclipse is rendered. Override it with `fallback`.
+- Rendering stops while offscreen or in a hidden tab.

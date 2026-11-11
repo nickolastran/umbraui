@@ -1,0 +1,10 @@
+## Usage notes
+
+`DialogContent` requires a `title`: it is the dialog's accessible name.
+
+## Accessibility
+
+- Focus moves into the dialog, is trapped while open, and returns to the trigger on close.
+- Escape and outside click close it.
+- `description` is linked with `aria-describedby`.
+- Content behind is hidden from assistive tech while open.

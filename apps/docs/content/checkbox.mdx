@@ -1,0 +1,9 @@
+## Usage notes
+
+Pass children for an inline label. `checked` accepts `true`, `false` or `"indeterminate"`.
+
+## Accessibility
+
+- `role="checkbox"` with `aria-checked` (`mixed` when indeterminate); Space toggles.
+- With children the root is a `<label>`, so the text is clickable and names the control.
+- A 24×24 hit area surrounds the 16px box (WCAG 2.5.8).

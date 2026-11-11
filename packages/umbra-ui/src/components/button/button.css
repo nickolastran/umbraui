@@ -1,0 +1,153 @@
+@layer umbra {
+  .umbra-spinner {
+    animation: umbra-spin 0.7s linear infinite;
+    flex: none;
+  }
+
+  .umbra-button {
+    --_solid: var(--umbra-color-accent);
+    --_solid-hover: var(--umbra-color-accent-hover);
+    --_solid-active: var(--umbra-color-accent-active);
+    --_on-solid: var(--umbra-color-text-on-accent);
+    --_fg: var(--umbra-color-accent-text);
+    --_subtle: var(--umbra-color-accent-subtle);
+    --_subtle-hover: color-mix(in srgb, var(--umbra-color-accent-subtle) 84%, var(--umbra-color-accent));
+    --_line: var(--umbra-color-accent-border);
+
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--umbra-space-1_5);
+    height: var(--umbra-size-md);
+    padding: 0 var(--umbra-space-3);
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: var(--umbra-radius-sm);
+    background: transparent;
+    color: var(--_fg);
+    font-size: var(--umbra-text-sm-size);
+    line-height: var(--umbra-text-sm-line);
+    letter-spacing: var(--umbra-text-sm-tracking);
+    font-weight: var(--umbra-font-weight-medium);
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--umbra-duration-fast) var(--umbra-ease-standard),
+      border-color var(--umbra-duration-fast) var(--umbra-ease-standard),
+      color var(--umbra-duration-fast) var(--umbra-ease-standard),
+      transform var(--umbra-duration-fast) var(--umbra-ease-standard);
+  }
+  .umbra-button[data-tone='neutral'] {
+    --_solid: var(--umbra-color-text);
+    --_solid-hover: color-mix(in srgb, var(--umbra-color-text) 86%, var(--umbra-color-bg));
+    --_solid-active: color-mix(in srgb, var(--umbra-color-text) 76%, var(--umbra-color-bg));
+    --_on-solid: var(--umbra-color-bg);
+    --_fg: var(--umbra-color-text);
+    --_subtle: var(--umbra-color-surface-2);
+    --_subtle-hover: var(--umbra-color-surface-3);
+    --_line: var(--umbra-color-border);
+  }
+  .umbra-button[data-tone='danger'] {
+    --_solid: var(--umbra-color-danger);
+    --_solid-hover: var(--umbra-color-danger-hover);
+    --_solid-active: var(--umbra-color-danger-active);
+    --_fg: var(--umbra-color-danger-text);
+    --_subtle: var(--umbra-color-danger-subtle);
+    --_subtle-hover: color-mix(in srgb, var(--umbra-color-danger-subtle) 84%, var(--umbra-color-danger));
+    --_line: var(--umbra-color-danger-border);
+  }
+
+  .umbra-button[data-size='sm'] {
+    height: var(--umbra-size-sm);
+    padding: 0 var(--umbra-space-2);
+    font-size: var(--umbra-text-xs-size);
+  }
+  .umbra-button[data-size='lg'] {
+    height: var(--umbra-size-lg);
+    padding: 0 var(--umbra-space-4);
+    border-radius: var(--umbra-radius-md);
+    font-size: var(--umbra-text-md-size);
+  }
+  .umbra-button[data-full-width] {
+    display: flex;
+    width: 100%;
+  }
+  .umbra-icon-button {
+    width: var(--umbra-size-md);
+    padding: 0;
+  }
+  .umbra-icon-button[data-size='sm'] {
+    width: var(--umbra-size-sm);
+    padding: 0;
+  }
+  .umbra-icon-button[data-size='lg'] {
+    width: var(--umbra-size-lg);
+    padding: 0;
+  }
+  .umbra-button__icon {
+    display: inline-flex;
+    flex: none;
+  }
+
+  .umbra-button[data-variant='solid'] {
+    background-color: var(--_solid);
+    color: var(--_on-solid);
+    box-shadow: var(--umbra-shadow-sm);
+  }
+  .umbra-button[data-variant='soft'] {
+    background-color: var(--_subtle);
+    border-color: var(--_line);
+  }
+  .umbra-button[data-variant='outline'] {
+    border-color: var(--_line);
+  }
+  .umbra-button[data-variant='outline'][data-tone='neutral'] {
+    border-color: var(--umbra-color-border-strong);
+  }
+  .umbra-button[data-variant='ghost'][data-tone='neutral'] {
+    color: var(--umbra-color-text-secondary);
+  }
+
+  @media (hover: hover) {
+    .umbra-button[data-variant='solid']:hover {
+      background-color: var(--_solid-hover);
+    }
+    .umbra-button[data-variant='soft']:hover {
+      background-color: var(--_subtle-hover);
+    }
+    .umbra-button:is([data-variant='outline'], [data-variant='ghost']):hover {
+      background-color: var(--_subtle);
+      color: var(--_fg);
+    }
+  }
+  .umbra-button:active {
+    transform: scale(0.98);
+  }
+  .umbra-button[data-variant='solid']:active {
+    background-color: var(--_solid-active);
+  }
+  .umbra-button:is([data-variant='soft'], [data-variant='outline'], [data-variant='ghost']):active {
+    background-color: var(--_subtle-hover);
+  }
+
+  .umbra-button:focus-visible {
+    outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+    outline-offset: var(--umbra-focus-ring-offset);
+  }
+  .umbra-button:is(:disabled, [data-disabled]) {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+  }
+  .umbra-button[data-loading] {
+    cursor: progress;
+  }
+  .umbra-button[data-loading]:active {
+    transform: none;
+  }
+}

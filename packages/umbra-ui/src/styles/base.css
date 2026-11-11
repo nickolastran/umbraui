@@ -1,0 +1,70 @@
+@layer umbra {
+  /* Zero-specificity defaults for every Umbra element. */
+  :where([class*='umbra-']) {
+    box-sizing: border-box;
+    font-family: var(--umbra-font-sans);
+  }
+  :where([class*='umbra-'])::before,
+  :where([class*='umbra-'])::after {
+    box-sizing: border-box;
+  }
+
+  /* Any themed root gets readable text; the document root also gets the canvas color. */
+  :where([data-umbra-theme]) {
+    color: var(--umbra-color-text);
+    font-family: var(--umbra-font-sans);
+    font-size: var(--umbra-text-md-size);
+    line-height: var(--umbra-text-md-line);
+    letter-spacing: var(--umbra-text-md-tracking);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  :where(html[data-umbra-theme]) {
+    background-color: var(--umbra-color-bg);
+  }
+  :where([data-umbra-theme]:not(html)) {
+    background-color: var(--umbra-color-bg);
+  }
+
+  .umbra-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @keyframes umbra-fade-in {
+    from { opacity: 0; }
+  }
+  @keyframes umbra-pop-in {
+    from { opacity: 0; transform: scale(0.97) translateY(2px); }
+  }
+  @keyframes umbra-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes umbra-pulse {
+    50% { opacity: 0.45; }
+  }
+}
+
+@layer umbra {
+  /* Reduced motion: no movement, no loops. The spinner is exempt: it is the only loading cue. */
+  @media (prefers-reduced-motion: reduce) {
+    :where([class*='umbra-']:not(.umbra-spinner)),
+    :where([class*='umbra-']:not(.umbra-spinner))::before,
+    :where([class*='umbra-']:not(.umbra-spinner))::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .umbra-spinner {
+      animation-duration: 1.6s;
+    }
+  }
+}

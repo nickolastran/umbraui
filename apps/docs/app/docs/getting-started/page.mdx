@@ -1,0 +1,55 @@
+export const metadata = { title: 'Getting started' };
+
+<div className="prose">
+
+# Getting started
+
+Umbra UI ships three entries from one package. Install the package, import one stylesheet, and add the peers only for the entries you use.
+
+## Install
+
+```bash
+npm install umbra-ui
+```
+
+Optional peers:
+
+```bash
+npm install motion                                        # for umbra-ui/motion
+npm install three @react-three/fiber @react-three/drei    # for umbra-ui/3d
+```
+
+## Set up
+
+Import the stylesheet once and wrap your app in the provider. Dark is the default theme.
+
+```tsx
+import { ThemeProvider } from 'umbra-ui';
+import 'umbra-ui/styles.css';
+
+export function App({ children }) {
+  return <ThemeProvider defaultMode="system">{children}</ThemeProvider>;
+}
+```
+
+You do not need Tailwind or any build plugin: the stylesheet is plain CSS, and every rule sits in `@layer umbra`, so your own CSS always wins without specificity fights.
+
+## Use components
+
+```tsx
+import { Button, Dialog, DialogContent, DialogTrigger } from 'umbra-ui';
+import { toast, Toaster } from 'umbra-ui/motion';
+import { HeroScene } from 'umbra-ui/3d';
+```
+
+All three entries share a vocabulary: `variant`, `size` (`sm`, `md`, `lg`), `tone`, `disabled`, `loading`. Animated and 3D components add `reducedMotion`; 3D components add `quality` and `fallback`.
+
+## Fonts
+
+The font tokens name Geist and Inter first and fall back to the system UI font. Load whichever you like, or override `--umbra-font-sans`.
+
+## React 18
+
+`umbra-ui` and `umbra-ui/motion` support React 18 and 19. `umbra-ui/3d` follows React Three Fiber: use Fiber 9 and drei 10 with React 19, or Fiber 8 and drei 9 with React 18.
+
+</div>

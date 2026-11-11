@@ -1,0 +1,10 @@
+## Usage notes
+
+Mount `<Toaster />` once, then call `toast()` from anywhere.
+
+## Accessibility
+
+- The stack is a labelled landmark containing a polite live region; `danger` toasts use `role="alert"`.
+- F8 (configurable) moves focus to the newest toast; Escape dismisses the focused toast and returns focus to where it was.
+- Timers pause on hover and focus.
+- Every toast has a labelled dismiss button.

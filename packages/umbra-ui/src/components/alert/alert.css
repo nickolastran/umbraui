@@ -1,0 +1,37 @@
+@layer umbra {
+  .umbra-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--umbra-space-3);
+    padding: var(--umbra-space-3) var(--umbra-space-4);
+    border: 1px solid var(--_line);
+    border-radius: var(--umbra-radius-md);
+    background-color: var(--_subtle);
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-sm-size);
+    line-height: var(--umbra-text-sm-line);
+    letter-spacing: var(--umbra-text-sm-tracking);
+  }
+  .umbra-alert[data-variant='outline'] {
+    background-color: transparent;
+  }
+  .umbra-alert__icon {
+    display: inline-flex;
+    flex: none;
+    margin-top: var(--umbra-space-0_5);
+    color: var(--_fg);
+  }
+  .umbra-alert__body {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    gap: var(--umbra-space-0_5);
+  }
+  .umbra-alert__title {
+    color: var(--umbra-color-text);
+    font-weight: var(--umbra-font-weight-medium);
+  }
+  .umbra-alert__dismiss {
+    margin: calc(var(--umbra-space-1) * -1) calc(var(--umbra-space-2) * -1) calc(var(--umbra-space-1) * -1) 0;
+  }
+}

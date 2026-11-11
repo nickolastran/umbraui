@@ -1,0 +1,149 @@
+@layer umbra {
+  /* Checkbox, Radio and Switch share a row layout and state colours. */
+  .umbra-choice {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--umbra-space-2);
+    color: var(--umbra-color-text);
+    font-size: var(--umbra-text-sm-size);
+    line-height: var(--umbra-text-sm-line);
+    letter-spacing: var(--umbra-text-sm-tracking);
+    cursor: default;
+  }
+  .umbra-choice[data-disabled] {
+    color: var(--umbra-color-text-disabled);
+  }
+  .umbra-choice > :is(.umbra-checkbox, .umbra-radio) {
+    margin-top: var(--umbra-space-0_5);
+  }
+
+  :is(.umbra-checkbox, .umbra-radio, .umbra-switch) {
+    appearance: none;
+    position: relative;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--umbra-color-border-control);
+    background-color: var(--umbra-color-surface-1);
+    color: var(--umbra-color-text-on-accent);
+    cursor: pointer;
+    transition:
+      background-color var(--umbra-duration-fast) var(--umbra-ease-standard),
+      border-color var(--umbra-duration-fast) var(--umbra-ease-standard);
+  }
+  /* Enlarged hit area: at least 24×24 CSS px (WCAG 2.5.8). */
+  :is(.umbra-checkbox, .umbra-radio, .umbra-switch)::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+  }
+  @media (hover: hover) {
+    :is(.umbra-checkbox, .umbra-radio, .umbra-switch):hover {
+      border-color: var(--umbra-color-text-muted);
+    }
+  }
+  :is(.umbra-checkbox, .umbra-radio, .umbra-switch):focus-visible {
+    outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+    outline-offset: var(--umbra-focus-ring-offset);
+  }
+  :is(.umbra-checkbox, .umbra-radio, .umbra-switch):disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  :is(.umbra-checkbox, .umbra-radio)[aria-invalid='true'] {
+    border-color: var(--umbra-color-danger-text);
+  }
+
+  .umbra-checkbox {
+    width: var(--umbra-space-4);
+    height: var(--umbra-space-4);
+    border-radius: var(--umbra-radius-xs);
+  }
+  .umbra-checkbox:is([data-state='checked'], [data-state='indeterminate']),
+  .umbra-switch[data-state='checked'] {
+    background-color: var(--umbra-color-accent);
+    border-color: var(--umbra-color-accent);
+  }
+  @media (hover: hover) {
+    .umbra-checkbox:is([data-state='checked'], [data-state='indeterminate']):hover,
+    .umbra-switch[data-state='checked']:hover {
+      background-color: var(--umbra-color-accent-hover);
+      border-color: var(--umbra-color-accent-hover);
+    }
+  }
+  .umbra-checkbox__indicator {
+    display: inline-flex;
+  }
+  .umbra-checkbox__indicator svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 2;
+  }
+  .umbra-checkbox[data-state='checked'] .umbra-checkbox__minus,
+  .umbra-checkbox[data-state='indeterminate'] .umbra-checkbox__check {
+    display: none;
+  }
+
+  .umbra-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--umbra-space-2);
+  }
+  .umbra-radio-group[data-orientation='horizontal'] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--umbra-space-4);
+  }
+  .umbra-radio {
+    width: var(--umbra-space-4);
+    height: var(--umbra-space-4);
+    border-radius: var(--umbra-radius-full);
+  }
+  .umbra-radio[data-state='checked'] {
+    border-color: var(--umbra-color-accent);
+    border-width: 5px;
+    background-color: var(--umbra-color-text-on-accent);
+  }
+
+  .umbra-switch {
+    width: 32px;
+    height: 18px;
+    justify-content: flex-start;
+    border-radius: var(--umbra-radius-full);
+    background-color: var(--umbra-color-surface-3);
+  }
+  .umbra-switch[data-size='sm'] {
+    width: 26px;
+    height: 14px;
+  }
+  .umbra-switch__thumb {
+    width: 12px;
+    height: 12px;
+    margin-inline-start: 2px;
+    border-radius: var(--umbra-radius-full);
+    background-color: var(--umbra-color-text-secondary);
+    transition:
+      transform var(--umbra-duration-fast) var(--umbra-ease-out),
+      background-color var(--umbra-duration-fast) var(--umbra-ease-standard);
+  }
+  .umbra-switch[data-size='sm'] .umbra-switch__thumb {
+    width: 8px;
+    height: 8px;
+  }
+  .umbra-switch[data-state='checked'] .umbra-switch__thumb {
+    transform: translateX(14px);
+    background-color: var(--umbra-color-text-on-accent);
+  }
+  .umbra-switch[data-size='sm'][data-state='checked'] .umbra-switch__thumb {
+    transform: translateX(12px);
+  }
+  [dir='rtl'] .umbra-switch[data-state='checked'] .umbra-switch__thumb {
+    transform: translateX(-14px);
+  }
+  [dir='rtl'] .umbra-switch[data-size='sm'][data-state='checked'] .umbra-switch__thumb {
+    transform: translateX(-12px);
+  }
+}

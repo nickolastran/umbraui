@@ -1,0 +1,73 @@
+import { TokenEditor } from '@/components/TokenEditor';
+
+export const metadata = { title: 'Theming' };
+
+<div className="prose">
+
+# Theming
+
+Every colour, radius, space, shadow and duration is a design token. Tokens are CSS custom properties prefixed `--umbra-`, switched per theme by the `data-umbra-theme` attribute, and also exported as a typed object.
+
+## Try it
+
+Change the accent, radius or font. Everything on this page updates, including the header, the sidebar and the 3D orb. Copy the result into your own stylesheet.
+
+</div>
+
+<TokenEditor />
+
+<div className="prose">
+
+## Override tokens
+
+In CSS, after importing the stylesheet:
+
+```css
+:root {
+  --umbra-color-accent: #e5484d;
+  --umbra-radius-sm: 2px;
+}
+[data-umbra-theme='light'] {
+  --umbra-color-accent: #ce2c31;
+}
+```
+
+Or through the provider, with type-checked token names:
+
+```tsx
+<ThemeProvider overrides={{ 'radius-sm': '2px' }} darkOverrides={{ 'color-accent': '#e5484d' }}>
+```
+
+If you change colours, re-check contrast: the shipped values pass WCAG 2.1 AA in both themes, and overrides are your responsibility.
+
+## Modes
+
+`ThemeProvider` takes `defaultMode` (`"dark"`, `"light"` or `"system"`), stores the choice in `localStorage`, and exposes it through `useTheme()`:
+
+```tsx
+const { mode, resolvedTheme, setMode, toggle } = useTheme();
+```
+
+Pass `mode` and `onModeChange` to control it yourself, or `storageKey={null}` to turn persistence off.
+
+## Scoped themes
+
+The attribute works on any element, so one region can use the other theme:
+
+```tsx
+<div data-umbra-theme="light">…</div>
+```
+
+## Tokens in TypeScript
+
+```ts
+import { tokens, cssVar } from 'umbra-ui';
+
+tokens.dark['color-accent'];      // "#5b5bd6"
+tokens.motion.spring.snappy;      // { type: "spring", stiffness: 520, damping: 36, mass: 1 }
+cssVar('space-4');                // "var(--umbra-space-4)"
+```
+
+Animated components take their durations, easings and springs from `tokens.motion`. 3D components resolve material, light and fog colours from the tokens in effect on their container and update when the theme changes.
+
+</div>

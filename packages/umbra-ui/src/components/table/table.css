@@ -1,0 +1,67 @@
+@layer umbra {
+  .umbra-table-container {
+    overflow-x: auto;
+    border: 1px solid var(--umbra-color-border);
+    border-radius: var(--umbra-radius-md);
+    background-color: var(--umbra-color-surface-1);
+  }
+  .umbra-table-container:focus-visible {
+    outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+    outline-offset: var(--umbra-focus-ring-offset);
+  }
+  .umbra-table {
+    --_cell-y: var(--umbra-space-3);
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-sm-size);
+    line-height: var(--umbra-text-sm-line);
+    letter-spacing: var(--umbra-text-sm-tracking);
+    text-align: start;
+  }
+  .umbra-table[data-size='sm'] {
+    --_cell-y: var(--umbra-space-1_5);
+  }
+  .umbra-table__head,
+  .umbra-table__cell {
+    padding: var(--_cell-y) var(--umbra-space-4);
+    border-bottom: 1px solid var(--umbra-color-border-subtle);
+    text-align: start;
+    vertical-align: middle;
+  }
+  .umbra-table__head {
+    color: var(--umbra-color-text-muted);
+    font-size: var(--umbra-text-xs-size);
+    font-weight: var(--umbra-font-weight-medium);
+    white-space: nowrap;
+    background-color: var(--umbra-color-bg-subtle);
+    border-bottom-color: var(--umbra-color-border);
+  }
+  :is(.umbra-table__head, .umbra-table__cell)[data-numeric] {
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+  }
+  .umbra-table__body .umbra-table__row:last-child > * {
+    border-bottom: 0;
+  }
+  .umbra-table__row {
+    transition: background-color var(--umbra-duration-fast) var(--umbra-ease-standard);
+  }
+  @media (hover: hover) {
+    .umbra-table[data-interactive] .umbra-table__body .umbra-table__row:hover {
+      background-color: var(--umbra-color-surface-2);
+      color: var(--umbra-color-text);
+    }
+  }
+  .umbra-table__row[aria-selected='true'] {
+    background-color: var(--umbra-color-accent-subtle);
+    color: var(--umbra-color-text);
+  }
+  .umbra-table__caption {
+    caption-side: bottom;
+    padding: var(--umbra-space-3) var(--umbra-space-4);
+    color: var(--umbra-color-text-muted);
+    font-size: var(--umbra-text-xs-size);
+    text-align: start;
+  }
+}

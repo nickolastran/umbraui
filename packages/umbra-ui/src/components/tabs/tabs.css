@@ -1,0 +1,109 @@
+@layer umbra {
+  .umbra-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--umbra-space-4);
+    min-width: 0;
+  }
+  .umbra-tabs[data-orientation='vertical'] {
+    flex-direction: row;
+  }
+  .umbra-tabs__list {
+    position: relative;
+    display: flex;
+    gap: var(--umbra-space-1);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .umbra-tabs__list[data-orientation='vertical'] {
+    flex-direction: column;
+    overflow: visible;
+  }
+  .umbra-tabs[data-variant='underline'] > .umbra-tabs__list {
+    box-shadow: inset 0 -1px 0 var(--umbra-color-border);
+  }
+  .umbra-tabs[data-variant='underline'] > .umbra-tabs__list[data-orientation='vertical'] {
+    box-shadow: inset -1px 0 0 var(--umbra-color-border);
+  }
+  .umbra-tabs[data-variant='pill'] > .umbra-tabs__list {
+    align-self: flex-start;
+    padding: var(--umbra-space-0_5);
+    border: 1px solid var(--umbra-color-border);
+    border-radius: var(--umbra-radius-md);
+    background-color: var(--umbra-color-bg-subtle);
+  }
+  .umbra-tabs__trigger {
+    appearance: none;
+    position: relative;
+    z-index: 1;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--umbra-space-1_5);
+    height: var(--umbra-size-md);
+    margin: 0;
+    padding: 0 var(--umbra-space-3);
+    border: 0;
+    border-radius: var(--umbra-radius-sm);
+    background: transparent;
+    color: var(--umbra-color-text-muted);
+    font-size: var(--umbra-text-sm-size);
+    line-height: var(--umbra-text-sm-line);
+    letter-spacing: var(--umbra-text-sm-tracking);
+    font-weight: var(--umbra-font-weight-medium);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--umbra-duration-fast) var(--umbra-ease-standard);
+  }
+  .umbra-tabs[data-size='sm'] .umbra-tabs__trigger {
+    height: var(--umbra-size-sm);
+    padding: 0 var(--umbra-space-2);
+    font-size: var(--umbra-text-xs-size);
+  }
+  @media (hover: hover) {
+    .umbra-tabs__trigger:hover {
+      color: var(--umbra-color-text);
+    }
+  }
+  .umbra-tabs__trigger[data-state='active'] {
+    color: var(--umbra-color-text);
+  }
+  .umbra-tabs__trigger:disabled {
+    color: var(--umbra-color-text-disabled);
+    cursor: not-allowed;
+  }
+  .umbra-tabs__trigger:focus-visible {
+    outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+    outline-offset: -2px;
+  }
+  /* Static indicator. AnimatedTabs (umbra-ui/motion) replaces it with a sliding element. */
+  .umbra-tabs:not([data-animated])[data-variant='underline'] .umbra-tabs__trigger[data-state='active']::after {
+    content: '';
+    position: absolute;
+    inset: auto var(--umbra-space-3) 0;
+    height: 2px;
+    border-radius: var(--umbra-radius-full);
+    background-color: var(--umbra-color-accent-text);
+  }
+  .umbra-tabs:not([data-animated])[data-variant='underline'] .umbra-tabs__trigger[data-orientation='vertical'][data-state='active']::after {
+    inset: var(--umbra-space-2) 0 var(--umbra-space-2) auto;
+    width: 2px;
+    height: auto;
+  }
+  .umbra-tabs:not([data-animated])[data-variant='pill'] .umbra-tabs__trigger[data-state='active'] {
+    background-color: var(--umbra-color-surface-3);
+    box-shadow: var(--umbra-shadow-sm);
+  }
+  .umbra-tabs__content {
+    flex: 1;
+    min-width: 0;
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-md-size);
+    line-height: var(--umbra-text-md-line);
+  }
+  .umbra-tabs__content:focus-visible {
+    outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+    outline-offset: var(--umbra-focus-ring-offset);
+    border-radius: var(--umbra-radius-xs);
+  }
+}

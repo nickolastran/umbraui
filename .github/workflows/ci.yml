@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build-storybook
+      - run: npm run size
+      - run: npm run build -w @umbra-ui/docs
+
+  react-18:
+    name: Tests on React 18
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # React 18 pairs with React Three Fiber 8 / drei 9 (see README, "React 18").
+      - run: npm i --no-save --legacy-peer-deps react@18 react-dom@18 @types/react@18 @types/react-dom@18 @react-three/fiber@8 @react-three/drei@9
+      # npm keeps the workspace's own React 19 nested next to the library; remove it so every import resolves React 18.
+      - run: rm -rf packages/umbra-ui/node_modules/react packages/umbra-ui/node_modules/react-dom packages/umbra-ui/node_modules/@react-three
+      - run: node -e "const v=require('react').version; if(!v.startsWith('18.')) throw new Error('expected React 18, got '+v); console.log('React', v)"
+      - run: npm test

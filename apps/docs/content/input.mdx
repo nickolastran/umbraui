@@ -1,0 +1,9 @@
+## Usage notes
+
+Controlled with `value` / `onChange`, or uncontrolled with `defaultValue`. The native `size` attribute is available as `htmlSize`.
+
+## Accessibility
+
+- Always give it a name: wrap it in `FormField` or pass `aria-label`.
+- `invalid` sets `aria-invalid`; inside a `FormField` with an `error` this happens automatically.
+- The control border meets 3:1 contrast against every surface in both themes.

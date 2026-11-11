@@ -1,0 +1,78 @@
+@layer umbra {
+  .umbra-card {
+    --_pad: var(--umbra-space-5);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--umbra-space-4);
+    padding: var(--_pad);
+    border: 1px solid var(--umbra-color-border);
+    border-radius: var(--umbra-radius-lg);
+    background-color: var(--umbra-color-surface-1);
+    background-image: var(--umbra-gradient-surface);
+    color: var(--umbra-color-text);
+    text-decoration: none;
+    transition:
+      border-color var(--umbra-duration-base) var(--umbra-ease-standard),
+      background-color var(--umbra-duration-base) var(--umbra-ease-standard);
+  }
+  .umbra-card[data-size='sm'] {
+    --_pad: var(--umbra-space-3);
+    gap: var(--umbra-space-3);
+    border-radius: var(--umbra-radius-md);
+  }
+  .umbra-card[data-size='lg'] {
+    --_pad: var(--umbra-space-8);
+    gap: var(--umbra-space-6);
+  }
+  .umbra-card[data-variant='outline'] {
+    background: transparent;
+  }
+  .umbra-card[data-variant='ghost'] {
+    background: transparent;
+    border-color: transparent;
+  }
+  .umbra-card[data-interactive] {
+    cursor: pointer;
+  }
+  @media (hover: hover) {
+    .umbra-card[data-interactive]:hover {
+      border-color: var(--umbra-color-border-strong);
+      background-color: var(--umbra-color-surface-2);
+    }
+  }
+  .umbra-card[data-interactive]:focus-visible {
+    outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+    outline-offset: var(--umbra-focus-ring-offset);
+  }
+  .umbra-card__header {
+    display: grid;
+    gap: var(--umbra-space-1);
+  }
+  .umbra-card__title {
+    margin: 0;
+    font-size: var(--umbra-text-lg-size);
+    line-height: var(--umbra-text-lg-line);
+    letter-spacing: var(--umbra-text-lg-tracking);
+    font-weight: var(--umbra-font-weight-semibold);
+  }
+  .umbra-card__description {
+    margin: 0;
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-sm-size);
+    line-height: var(--umbra-text-sm-line);
+  }
+  .umbra-card__content {
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-md-size);
+    line-height: var(--umbra-text-md-line);
+  }
+  .umbra-card__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--umbra-space-2);
+    margin-top: auto;
+    padding-top: var(--umbra-space-4);
+    border-top: 1px solid var(--umbra-color-border-subtle);
+  }
+}

@@ -1,0 +1,46 @@
+export const metadata = { title: 'SSR and Next.js' };
+
+<div className="prose">
+
+# SSR and Next.js
+
+Every module in the package starts with `"use client"`, so you can import components straight into Server Components. Nothing touches `window`, `document` or WebGL at import time.
+
+## App Router setup
+
+```tsx
+// app/layout.tsx
+import { ThemeProvider, ThemeScript } from 'umbra-ui';
+import 'umbra-ui/styles.css';
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript defaultMode="system" />
+      </head>
+      <body>
+        <ThemeProvider defaultMode="system">{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+`ThemeScript` is a tiny inline script that sets `data-umbra-theme` before first paint, so there is no flash of the wrong theme. It changes an attribute React did not render, which is why `<html>` needs `suppressHydrationWarning`. Give `ThemeScript` and `ThemeProvider` the same `defaultMode` and `storageKey`.
+
+With a Content Security Policy, pass `nonce` to `ThemeScript`.
+
+## 3D components
+
+The server renders a token-styled placeholder. On the client the component checks for WebGL and the reduced-motion preference, then either loads the scene with a dynamic `import()` or renders a static fallback. three.js is never part of your initial bundle and never runs on the server; you do not need `next/dynamic` or `ssr: false`.
+
+## Animated components
+
+They render their final layout on the server. Entrance animations start after hydration.
+
+## This site
+
+This documentation is a Next.js App Router project exported as static HTML. It uses the library exactly as shown above.
+
+</div>

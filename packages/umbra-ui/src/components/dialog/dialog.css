@@ -1,0 +1,70 @@
+@layer umbra {
+  .umbra-dialog__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--umbra-z-overlay);
+    background-color: var(--umbra-color-overlay);
+    backdrop-filter: blur(2px);
+    animation: umbra-fade-in var(--umbra-duration-base) var(--umbra-ease-out);
+  }
+  .umbra-dialog {
+    position: fixed;
+    z-index: var(--umbra-z-modal);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--umbra-space-5);
+    width: calc(100vw - var(--umbra-space-8));
+    max-width: 30rem;
+    max-height: calc(100dvh - var(--umbra-space-8));
+    overflow: auto;
+    padding: var(--umbra-space-6);
+    border: 1px solid var(--umbra-color-border);
+    border-radius: var(--umbra-radius-lg);
+    background-color: var(--umbra-color-surface-1);
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-md-size);
+    line-height: var(--umbra-text-md-line);
+    box-shadow: var(--umbra-shadow-lg);
+    animation: umbra-pop-in var(--umbra-duration-base) var(--umbra-ease-out);
+  }
+  .umbra-dialog[data-size='sm'] {
+    max-width: 24rem;
+  }
+  .umbra-dialog[data-size='lg'] {
+    max-width: 40rem;
+  }
+  .umbra-dialog:focus {
+    outline: none;
+  }
+  .umbra-dialog__header {
+    display: grid;
+    gap: var(--umbra-space-1_5);
+    padding-inline-end: var(--umbra-space-8);
+  }
+  .umbra-dialog__title {
+    margin: 0;
+    color: var(--umbra-color-text);
+    font-size: var(--umbra-text-xl-size);
+    line-height: var(--umbra-text-xl-line);
+    letter-spacing: var(--umbra-text-xl-tracking);
+    font-weight: var(--umbra-font-weight-semibold);
+  }
+  .umbra-dialog__description {
+    margin: 0;
+    color: var(--umbra-color-text-secondary);
+  }
+  .umbra-dialog__close {
+    position: absolute;
+    top: var(--umbra-space-4);
+    inset-inline-end: var(--umbra-space-4);
+  }
+  .umbra-dialog__footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--umbra-space-2);
+  }
+}

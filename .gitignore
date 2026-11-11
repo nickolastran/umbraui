@@ -1,0 +1,12 @@
+node_modules
+dist
+.next
+out
+storybook-static
+coverage
+*.tgz
+*.tsbuildinfo
+.DS_Store
+.vercel
+next-env.d.ts
+apps/docs/generated

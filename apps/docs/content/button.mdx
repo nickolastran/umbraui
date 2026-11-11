@@ -1,0 +1,10 @@
+## Usage notes
+
+Use one solid accent button per view for the primary action. `asChild` renders a link with button styling.
+
+## Accessibility
+
+- Native `<button>`: Enter and Space activate it.
+- `loading` sets `aria-busy` and `aria-disabled` but keeps the button focusable, so focus is not lost mid-submit.
+- `IconButton` requires `aria-label`; icons passed to `startIcon` / `endIcon` are hidden from assistive tech.
+- Focus ring is a 2px outline in `color-focus`, which also shows in forced-colors mode.

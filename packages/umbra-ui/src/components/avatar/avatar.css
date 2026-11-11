@@ -1,0 +1,37 @@
+@layer umbra {
+  .umbra-avatar {
+    --_size: var(--umbra-size-md);
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: var(--_size);
+    height: var(--_size);
+    overflow: hidden;
+    border: 1px solid var(--umbra-color-border);
+    border-radius: var(--umbra-radius-full);
+    background-color: var(--umbra-color-surface-3);
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-xs-size);
+    font-weight: var(--umbra-font-weight-medium);
+    line-height: 1;
+    user-select: none;
+    vertical-align: middle;
+  }
+  .umbra-avatar[data-size='sm'] {
+    --_size: var(--umbra-space-6);
+    font-size: 0.625rem;
+  }
+  .umbra-avatar[data-size='lg'] {
+    --_size: var(--umbra-size-lg);
+    font-size: var(--umbra-text-sm-size);
+  }
+  .umbra-avatar[data-shape='square'] {
+    border-radius: var(--umbra-radius-sm);
+  }
+  .umbra-avatar__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

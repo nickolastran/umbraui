@@ -1,0 +1,87 @@
+{
+  "name": "umbra-ui",
+  "version": "0.0.0",
+  "description": "Dark-first React component library: static, animated and 3D components on one design-token system.",
+  "license": "MIT",
+  "keywords": ["react", "components", "ui", "design-system", "radix", "motion", "three", "react-three-fiber"],
+  "type": "module",
+  "sideEffects": ["**/*.css"],
+  "files": ["dist"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+    },
+    "./motion": {
+      "import": { "types": "./dist/motion.d.ts", "default": "./dist/motion.js" },
+      "require": { "types": "./dist/motion.d.cts", "default": "./dist/motion.cjs" }
+    },
+    "./3d": {
+      "import": { "types": "./dist/3d.d.ts", "default": "./dist/3d.js" },
+      "require": { "types": "./dist/3d.d.cts", "default": "./dist/3d.cjs" }
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": { "*": { "motion": ["./dist/motion.d.ts"], "3d": ["./dist/3d.d.ts"] } },
+  "scripts": {
+    "tokens": "tsx scripts/build-tokens.ts",
+    "build": "npm run tokens && tsup && tsx scripts/build-css.ts",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "size": "tsx scripts/size.ts"
+  },
+  "peerDependencies": {
+    "@react-three/drei": "^9.114.0 || ^10.0.0",
+    "@react-three/fiber": "^8.17.0 || ^9.0.0",
+    "motion": "^11.11.0 || ^12.0.0 || ^13.0.0 || ^14.0.0",
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "three": ">=0.159.0"
+  },
+  "peerDependenciesMeta": {
+    "@react-three/drei": { "optional": true },
+    "@react-three/fiber": { "optional": true },
+    "motion": { "optional": true },
+    "three": { "optional": true }
+  },
+  "dependencies": {
+    "radix-ui": "^1.4.0"
+  },
+  "devDependencies": {
+    "@react-three/drei": "^10.7.0",
+    "@react-three/fiber": "^9.8.0",
+    "@storybook/addon-a11y": "^8.6.19",
+    "@storybook/addon-essentials": "^8.6.19",
+    "@storybook/react": "^8.6.19",
+    "@storybook/react-vite": "^8.6.19",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.0",
+    "@types/node": "^20.17.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "^0.187.0",
+    "axe-core": "^4.10.0",
+    "esbuild": "^0.25.0",
+    "jsdom": "^26.0.0",
+    "motion": "^14.12.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "storybook": "^8.6.19",
+    "three": "^0.187.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3",
+    "vite": "^6.4.0",
+    "vitest": "^3.2.0"
+  }
+}

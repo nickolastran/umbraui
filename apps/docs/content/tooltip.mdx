@@ -1,0 +1,9 @@
+## Usage notes
+
+The child must be a single focusable element.
+
+## Accessibility
+
+- Shown on hover (after `delay`) and immediately on keyboard focus; Escape dismisses.
+- Linked to the trigger with `aria-describedby`: it supplements the accessible name, so icon-only triggers still need `aria-label`.
+- Hovering the tooltip itself keeps it open (WCAG 1.4.13).

@@ -1,0 +1,369 @@
+@layer umbra {
+  /* ShimmerButton */
+  .umbra-shimmer-button {
+    position: relative;
+    isolation: isolate;
+  }
+  .umbra-shimmer-button__clip {
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .umbra-shimmer-button__shine {
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 35%;
+    background: linear-gradient(100deg, transparent, color-mix(in srgb, currentColor 32%, transparent), transparent);
+    will-change: transform;
+  }
+  .umbra-shimmer-button[data-glow] {
+    box-shadow: var(--umbra-glow-accent);
+  }
+  .umbra-shimmer-button[data-glow]::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--umbra-gradient-accent);
+    mask:
+      linear-gradient(black 0 0) content-box exclude,
+      linear-gradient(black 0 0);
+    pointer-events: none;
+    opacity: 0.9;
+    transition: opacity var(--umbra-duration-base) var(--umbra-ease-standard);
+  }
+  .umbra-shimmer-button[data-glow]:is(:disabled, [data-disabled]) {
+    box-shadow: none;
+  }
+  .umbra-shimmer-button[data-glow]:is(:disabled, [data-disabled])::before {
+    opacity: 0.3;
+  }
+
+  /* SpotlightCard */
+  .umbra-spotlight-card {
+    isolation: isolate;
+  }
+  .umbra-spotlight-card__light {
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(var(--_size) circle at var(--_at), var(--umbra-gradient-spotlight), transparent 70%);
+  }
+  .umbra-spotlight-card__light::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: radial-gradient(calc(var(--_size) * 0.6) circle at var(--_at), var(--umbra-color-accent-text), transparent 70%);
+    mask:
+      linear-gradient(black 0 0) content-box exclude,
+      linear-gradient(black 0 0);
+  }
+
+  /* BeamBorder */
+  .umbra-beam-border {
+    --_bw: 1px;
+    --_radius: var(--umbra-radius-lg);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: var(--_bw);
+    border-radius: var(--_radius);
+    background-color: var(--umbra-color-border);
+  }
+  .umbra-beam-border[data-radius='sm'] {
+    --_radius: var(--umbra-radius-sm);
+  }
+  .umbra-beam-border[data-radius='md'] {
+    --_radius: var(--umbra-radius-md);
+  }
+  .umbra-beam-border[data-radius='full'] {
+    --_radius: var(--umbra-radius-full);
+  }
+  .umbra-beam-border__beam {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    min-width: 220%;
+    min-height: 220%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    background: var(--umbra-gradient-beam);
+    will-change: transform;
+  }
+  .umbra-beam-border__content {
+    height: 100%;
+    border-radius: calc(var(--_radius) - var(--_bw));
+    background-color: var(--umbra-color-surface-1);
+    color: var(--umbra-color-text);
+  }
+
+  /* TextReveal */
+  .umbra-text-reveal {
+    position: relative;
+  }
+  .umbra-text-reveal__clip {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    /* room for descenders so clipping does not cut them */
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+  .umbra-text-reveal__piece {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* NumberTicker */
+  .umbra-number-ticker {
+    position: relative;
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Marquee */
+  .umbra-marquee {
+    overflow: hidden;
+    min-width: 0;
+  }
+  .umbra-marquee[data-fade] {
+    mask-image: linear-gradient(to right, transparent, black var(--umbra-space-12), black calc(100% - var(--umbra-space-12)), transparent);
+  }
+  .umbra-marquee__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+  .umbra-marquee__group {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--_gap);
+    padding-inline-end: var(--_gap);
+  }
+  .umbra-marquee[data-static] .umbra-marquee__track {
+    width: auto;
+  }
+  .umbra-marquee[data-static] .umbra-marquee__group {
+    flex: 1;
+    flex-wrap: wrap;
+    padding-inline-end: 0;
+  }
+
+  /* AnimatedTabs */
+  .umbra-tabs__label {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--umbra-space-1_5);
+  }
+  .umbra-tabs__indicator {
+    position: absolute;
+    inset: auto var(--umbra-space-3) 0;
+    height: 2px;
+    border-radius: var(--umbra-radius-full);
+    background-color: var(--umbra-color-accent-text);
+  }
+  .umbra-tabs[data-variant='underline'] .umbra-tabs__trigger[data-orientation='vertical'] .umbra-tabs__indicator {
+    inset: var(--umbra-space-2) 0 var(--umbra-space-2) auto;
+    width: 2px;
+    height: auto;
+  }
+  .umbra-tabs[data-variant='pill'] .umbra-tabs__indicator {
+    inset: 0;
+    height: auto;
+    border-radius: var(--umbra-radius-sm);
+    background-color: var(--umbra-color-surface-3);
+    box-shadow: var(--umbra-shadow-sm);
+  }
+
+  /* Toast */
+  .umbra-toaster {
+    position: fixed;
+    z-index: var(--umbra-z-toast);
+    inset: auto var(--umbra-space-4) var(--umbra-space-4) auto;
+    width: min(24rem, calc(100vw - var(--umbra-space-8)));
+    pointer-events: none;
+  }
+  .umbra-toaster[data-position^='top'] {
+    inset-block: var(--umbra-space-4) auto;
+  }
+  .umbra-toaster[data-position$='left'] {
+    inset-inline: var(--umbra-space-4) auto;
+  }
+  .umbra-toaster[data-position$='center'] {
+    inset-inline: 0;
+    margin-inline: auto;
+  }
+  .umbra-toaster__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--umbra-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .umbra-toaster[data-position^='top'] .umbra-toaster__list {
+    flex-direction: column-reverse;
+  }
+  .umbra-toast {
+    --_fg: var(--umbra-color-text-muted);
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--umbra-space-3);
+    padding: var(--umbra-space-3) var(--umbra-space-3) var(--umbra-space-3) var(--umbra-space-4);
+    overflow: hidden;
+    border: 1px solid var(--umbra-color-border);
+    border-radius: var(--umbra-radius-md);
+    background-color: var(--umbra-color-surface-2);
+    color: var(--umbra-color-text-secondary);
+    font-size: var(--umbra-text-sm-size);
+    line-height: var(--umbra-text-sm-line);
+    letter-spacing: var(--umbra-text-sm-tracking);
+    box-shadow: var(--umbra-shadow-md);
+    pointer-events: auto;
+  }
+  .umbra-toast[data-tone='accent'] {
+    --_fg: var(--umbra-color-accent-text);
+  }
+  .umbra-toast[data-tone='success'] {
+    --_fg: var(--umbra-color-success-text);
+  }
+  .umbra-toast[data-tone='warning'] {
+    --_fg: var(--umbra-color-warning-text);
+  }
+  .umbra-toast[data-tone='danger'] {
+    --_fg: var(--umbra-color-danger-text);
+  }
+  .umbra-toast[data-tone='info'] {
+    --_fg: var(--umbra-color-info-text);
+  }
+  .umbra-toast__bar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background-color: var(--_fg);
+  }
+  .umbra-toast:focus-visible {
+    outline: var(--umbra-focus-ring-width) solid var(--umbra-color-focus);
+    outline-offset: var(--umbra-focus-ring-offset);
+  }
+  .umbra-toast__body {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    gap: var(--umbra-space-0_5);
+    padding-block: var(--umbra-space-0_5);
+  }
+  .umbra-toast__title {
+    color: var(--umbra-color-text);
+    font-weight: var(--umbra-font-weight-medium);
+  }
+  .umbra-toast__action,
+  .umbra-toast__close {
+    flex: none;
+  }
+
+  /* CommandPalette */
+  .umbra-command__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--umbra-z-overlay);
+    background-color: var(--umbra-color-overlay);
+    backdrop-filter: blur(2px);
+  }
+  .umbra-command {
+    position: fixed;
+    z-index: var(--umbra-z-modal);
+    top: min(18vh, 9rem);
+    left: 50%;
+    translate: -50% 0;
+    display: flex;
+    flex-direction: column;
+    width: min(36rem, calc(100vw - var(--umbra-space-8)));
+    max-height: min(28rem, 70dvh);
+    overflow: hidden;
+    border: 1px solid var(--umbra-color-border);
+    border-radius: var(--umbra-radius-lg);
+    background-color: var(--umbra-color-surface-1);
+    color: var(--umbra-color-text);
+    box-shadow: var(--umbra-shadow-lg), var(--umbra-glow-accent);
+    transform-origin: top center;
+  }
+  .umbra-command:focus {
+    outline: none;
+  }
+  .umbra-command__search {
+    display: flex;
+    align-items: center;
+    gap: var(--umbra-space-3);
+    padding: 0 var(--umbra-space-4);
+    border-bottom: 1px solid var(--umbra-color-border);
+    color: var(--umbra-color-text-muted);
+  }
+  .umbra-command__input {
+    flex: 1;
+    min-width: 0;
+    height: var(--umbra-space-12);
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--umbra-color-text);
+    font: inherit;
+    font-size: var(--umbra-text-lg-size);
+    letter-spacing: var(--umbra-text-lg-tracking);
+  }
+  .umbra-command__input::placeholder {
+    color: var(--umbra-color-text-muted);
+    opacity: 1;
+  }
+  /* The input is the only focus target in the palette; the caret plus this rule mark focus. */
+  .umbra-command__search:focus-within {
+    box-shadow: inset 0 -1px 0 var(--umbra-color-focus);
+  }
+  .umbra-command__list {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--umbra-space-1_5);
+    scroll-padding-block: var(--umbra-space-8);
+  }
+  .umbra-command__item {
+    min-height: var(--umbra-size-lg);
+    padding-inline: var(--umbra-space-3);
+    cursor: pointer;
+  }
+  .umbra-command__item .umbra-menu__shortcut {
+    margin-inline-end: 0;
+  }
+  .umbra-command__icon {
+    display: inline-flex;
+    color: var(--umbra-color-text-muted);
+  }
+  .umbra-command__empty {
+    padding: var(--umbra-space-8) var(--umbra-space-4);
+    color: var(--umbra-color-text-muted);
+    font-size: var(--umbra-text-sm-size);
+    text-align: center;
+  }
+
+  /* StaggeredList */
+  .umbra-staggered-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}

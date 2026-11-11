@@ -1,0 +1,38 @@
+@layer umbra {
+  .umbra-box[data-bordered] {
+    border: 1px solid var(--umbra-color-border);
+  }
+  .umbra-stack {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .umbra-inline {
+    display: flex;
+    min-width: 0;
+  }
+  .umbra-grid {
+    display: grid;
+    min-width: 0;
+  }
+  .umbra-container {
+    width: 100%;
+    max-width: var(--umbra-container-lg);
+    margin-inline: auto;
+    padding-inline: var(--umbra-space-4);
+  }
+  .umbra-container[data-size='sm'] {
+    max-width: var(--umbra-container-sm);
+  }
+  .umbra-container[data-size='md'] {
+    max-width: var(--umbra-container-md);
+  }
+  .umbra-container[data-size='xl'] {
+    max-width: var(--umbra-container-xl);
+  }
+  @media (min-width: 48rem) {
+    .umbra-container {
+      padding-inline: var(--umbra-space-6);
+    }
+  }
+}
